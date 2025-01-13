@@ -4,7 +4,7 @@ import React from "react";
 import { useState ,useRef} from "react";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import Link from "next/link";
-import Image from "next/image";
+
 const Shorten = () => {
   const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState("");
@@ -12,6 +12,12 @@ const Shorten = () => {
   const [inError, setInError] = useState(false);
 const UrlRef = useRef();
 const ShorturlRef = useRef();
+
+const handleCopytext = () => {
+  const text=`${process.env.NEXT_PUBLIC_HOSTURL}/${generated}`
+  navigator.clipboard.writeText(text);
+ alert("Text copied to clipboard!");
+};
 
   const handleGenerate = async () => {
   if(!url){
@@ -129,19 +135,22 @@ const ShorturlRef = useRef();
         {generated && (
           <>
             <h3 className="text-xl font-semibold mt-2">Your Shorted URL</h3>
-            <div className="flex gap-4 ">
+            <div className="flex gap-4  items-center ">
             <code >
               <Link 
               target="_blank"  href={`${process.env.NEXT_PUBLIC_HOSTURL}/${generated}`}
               >{`${process.env.NEXT_PUBLIC_HOSTURL}/${generated}`}</Link>
               
             </code>
-            <Image
+            
+            <img
+                                  className="w-5 h-5 cursor-pointer"
                              alt="image of copy"
                              src={"/copy.png"}
-                             width={24}
-                             height={24}
+                             onClick={handleCopytext}
                            />
+          
+           
             </div>
             
           </>
