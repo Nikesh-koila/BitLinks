@@ -7,7 +7,7 @@ const Navbar = () => {
   const path=usePathname();
 
   return (
-    <nav className=" h-16 text-white bg-cyan-700 flex justify-between items-center px-2 sm:px-8">
+    <nav className=" h-16 text-white bg-cyan-700 flex justify-between items-center px-6 sm:px-8">
      <Link href="/">  <h2 className="text-3xl  font-bold">BitLinks</h2></Link>
       <ul className="flex gap-5 text-lg font-bold items-center justify-center">
       
