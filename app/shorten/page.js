@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useState ,useRef} from "react";
+import { useState, useRef } from "react";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import Link from "next/link";
 
@@ -10,27 +10,27 @@ const Shorten = () => {
   const [shortUrl, setShortUrl] = useState("");
   const [generated, setGenerated] = useState("");
   const [inError, setInError] = useState(false);
-const UrlRef = useRef();
-const ShorturlRef = useRef();
+  const UrlRef = useRef();
+  const ShorturlRef = useRef();
 
-const handleCopytext = () => {
-  const text=`${process.env.NEXT_PUBLIC_HOSTURL}/${generated}`
-  navigator.clipboard.writeText(text);
- alert("Text copied to clipboard!");
-};
+  const handleCopytext = () => {
+    const text = `${process.env.NEXT_PUBLIC_HOSTURL}/${generated}`;
+    navigator.clipboard.writeText(text);
+    alert("Text copied to clipboard!");
+  };
 
   const handleGenerate = async () => {
-  if(!url){
-    UrlRef.current.focus();
-    UrlRef.current.style.outline='2px solid red';
-    return;
-  }
-  if(!shortUrl){
-    ShorturlRef.current.focus();
-    ShorturlRef.current.style.outline='2px solid red';
-    return;
-  }
-    
+    if (!url) {
+      UrlRef.current.focus();
+      UrlRef.current.style.outline = "2px solid red";
+      return;
+    }
+    if (!shortUrl) {
+      ShorturlRef.current.focus();
+      ShorturlRef.current.style.outline = "2px solid red";
+      return;
+    }
+
     setGenerated("");
     const raw = JSON.stringify({
       url,
@@ -62,10 +62,9 @@ const handleCopytext = () => {
         transition: Bounce,
       });
     } else {
-      if(res.invalidUrl){
+      if (res.invalidUrl) {
         UrlRef.current.focus();
-      }
-      else{
+      } else {
         ShorturlRef.current.focus();
       }
       toast.error(res.message, {
@@ -83,8 +82,7 @@ const handleCopytext = () => {
   };
 
   return (
- 
-    <div className="pt-10 text-black" >
+    <div className="pt-10 text-black">
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -98,29 +96,31 @@ const handleCopytext = () => {
         theme="light"
         transition={Bounce}
       />
-      
+
       <div className="max-w-xl mx-2 sm:mx-auto bg-cyan-100 flex flex-col gap-8 px-6 py-10 sm:px-10 rounded-lg ">
         <h2 className="text-3xl  font-bold ">Generate short URLs</h2>
         <div className="flex flex-col gap-3">
           <input
-          ref={UrlRef}
-            className={`px-2 py-3 outline-cyan-500 rounded-md border-2 ${!url && inError ? 'border-red-500  shake' : ''} `}
+            ref={UrlRef}
+            className={`px-2 py-3 outline-cyan-500 rounded-md border-2 ${
+              !url && inError ? "border-red-500  shake" : ""
+            } `}
             type="text"
             placeholder="Enter your URL"
             value={url}
             onChange={(e) => {
-              UrlRef.current.style.outline='';
+              UrlRef.current.style.outline = "";
               setUrl(e.target.value);
             }}
           />
           <input
-           className={`px-2 py-3 outline-cyan-500 rounded-md `}
-           ref={ShorturlRef}
+            className={`px-2 py-3 outline-cyan-500 rounded-md `}
+            ref={ShorturlRef}
             type="text"
             value={shortUrl}
             placeholder="Enter preferred short URL text"
             onChange={(e) => {
-              ShorturlRef.current.style.outline='';
+              ShorturlRef.current.style.outline = "";
               setShortUrl(e.target.value);
             }}
           />
@@ -136,28 +136,24 @@ const handleCopytext = () => {
           <>
             <h3 className="text-xl font-semibold mt-2">Your Shorted URL</h3>
             <div className="flex gap-4  items-center ">
-            <code >
-              <Link 
-              target="_blank"  href={`${process.env.NEXT_PUBLIC_HOSTURL}/${generated}`}
-              >{`${process.env.NEXT_PUBLIC_HOSTURL}/${generated}`}</Link>
-              
-            </code>
-            
-            <img
-                                  className="w-5 h-5 cursor-pointer"
-                             alt="image of copy"
-                             src={"/copy.png"}
-                             onClick={handleCopytext}
-                           />
-          
-           
+              <code>
+                <Link
+                  target="_blank"
+                  href={`${process.env.NEXT_PUBLIC_HOSTURL}/${generated}`}
+                >{`${process.env.NEXT_PUBLIC_HOSTURL}/${generated}`}</Link>
+              </code>
+
+              <img
+                className="w-5 h-5 cursor-pointer"
+                alt="image of copy"
+                src={"/copy.png"}
+                onClick={handleCopytext}
+              />
             </div>
-            
           </>
         )}
       </div>
-      </div>
-   
+    </div>
   );
 };
 
