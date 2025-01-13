@@ -78,7 +78,7 @@ const ShorturlRef = useRef();
 
   return (
  
-    <div className="pt-10" >
+    <div className="pt-10 " >
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -94,7 +94,7 @@ const ShorturlRef = useRef();
       />
       
       <div className="max-w-xl mx-2 sm:mx-auto bg-cyan-100 flex flex-col gap-8 px-6 py-10 sm:px-10 rounded-lg ">
-        <h2 className="text-3xl  font-bold">Generate short URLs</h2>
+        <h2 className="text-3xl  font-bold text-black">Generate short URLs</h2>
         <div className="flex flex-col gap-3">
           <input
           ref={UrlRef}
