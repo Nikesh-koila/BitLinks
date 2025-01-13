@@ -10,7 +10,7 @@ const lobster = Lobster({
 
 export default function Home() {
   return (
-    <main>
+    <main className="text-black">
       <section className=" grid grid-rows-2 sm:grid-rows-none sm:grid-cols-2 h-auto sm:h-[70vh] pt-10 sm:pt-0  bg-cyan-100">
         <div className="flex flex-col justify-center items-center gap-3 ">
           <div className="min-h-12  px-4">
