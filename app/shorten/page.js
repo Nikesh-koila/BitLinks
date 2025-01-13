@@ -4,7 +4,7 @@ import React from "react";
 import { useState ,useRef} from "react";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import Link from "next/link";
-
+import Image from "next/image";
 const Shorten = () => {
   const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState("");
@@ -129,11 +129,21 @@ const ShorturlRef = useRef();
         {generated && (
           <>
             <h3 className="text-xl font-semibold mt-2">Your Shorted URL</h3>
-            <code>
-              <Link
+            <div className="flex gap-4 ">
+            <code >
+              <Link 
               target="_blank"  href={`${process.env.NEXT_PUBLIC_HOSTURL}/${generated}`}
               >{`${process.env.NEXT_PUBLIC_HOSTURL}/${generated}`}</Link>
+              
             </code>
+            <Image
+                             alt="image of copy"
+                             src={"/copy.png"}
+                             width={24}
+                             height={24}
+                           />
+            </div>
+            
           </>
         )}
       </div>
