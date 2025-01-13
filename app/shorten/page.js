@@ -20,12 +20,15 @@ const Shorten = () => {
   };
 
   const handleGenerate = async () => {
+    const ShortUrl = shortUrl.replace(/\s+/g, '');
+
+    
     if (!url) {
       UrlRef.current.focus();
       UrlRef.current.style.outline = "2px solid red";
       return;
     }
-    if (!shortUrl) {
+    if (!ShortUrl) {
       ShorturlRef.current.focus();
       ShorturlRef.current.style.outline = "2px solid red";
       return;
@@ -34,7 +37,7 @@ const Shorten = () => {
     setGenerated("");
     const raw = JSON.stringify({
       url,
-      shortUrl,
+      shortUrl:ShortUrl,
     });
 
     const reqOptions = {
@@ -47,7 +50,7 @@ const Shorten = () => {
     let res = await data.json();
 
     if (res.success) {
-      setGenerated(shortUrl);
+      setGenerated(ShortUrl);
       setShortUrl("");
       setUrl("");
       toast.success(res.message, {
